@@ -180,6 +180,11 @@ class TestCases(unittest.TestCase):
 
     # Part 1
     # test population_total
+    def test_population_total(self):
+        county_demographics = build_data.get_data()
+        expected = 318857056
+        actual = hw3.population_total(county_demographics)
+        self.assertEqual(expected, actual)
 
     # Part 2
     # test filter_by_state
