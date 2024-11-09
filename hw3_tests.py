@@ -180,27 +180,239 @@ class TestCases(unittest.TestCase):
 
     # Part 1
     # test population_total
+    def test_population_total_1(self):
+        county_demographics = build_data.get_data()
+        expected = 318857056
+        actual = hw3.population_total(county_demographics)
+        self.assertEqual(expected, actual)
+        
+    def test_population_total_2(self):
+        county_demographics = reduced_data
+        expected = 655813
+        actual = hw3.population_total(county_demographics)
+        self.assertEqual(expected, actual)
 
     # Part 2
     # test filter_by_state
+    def test_filter_by_state_1(self):
+        county_demographics = build_data.get_data()
+        state = "CA"
+        expected = 58
+        actual = len(hw3.filter_by_state(county_demographics, state))
+        self.assertEqual(expected, actual)
+
+    def test_filter_by_state_2(self):
+        county_demographics = build_data.get_data()
+        state = "CA"
+        expected = 38802500
+        actual = hw3.population_total(hw3.filter_by_state(county_demographics, state))
+        self.assertEqual(expected, actual)
 
     # Part 3
     # test population_by_education
+    def test_population_by_education_1(self):
+        county_demographics = [reduced_data[2]]
+        education_level = "Bachelor's Degree or Higher"
+        expected = 87911.145
+        actual = hw3.population_by_education(county_demographics, education_level)
+        self.assertAlmostEqual(expected, actual)
+
+    def test_population_by_education_2(self):
+        county_demographics = [reduced_data[2]]
+        education_level = "Does Not Exist"
+        expected = 0.0
+        actual = hw3.population_by_education(county_demographics, education_level)
+        self.assertAlmostEqual(expected, actual)
+
+    def test_population_by_education_3(self):
+        county_demographics = reduced_data
+        education_level = "Bachelor's Degree or Higher"
+        expected = 195114.091
+        actual = hw3.population_by_education(county_demographics, education_level)
+        self.assertAlmostEqual(expected, actual)
     # test population_by_ethnicity
+    def test_population_by_ethnicity_1(self):
+        county_demographics = [reduced_data[2]]
+        ethnicity_level = "Black Alone"
+        expected = 6139.826
+        actual = hw3.population_by_ethnicity(county_demographics, ethnicity_level)
+        self.assertAlmostEqual(expected, actual)
+
+    def test_population_by_ethnicity_2(self):
+        county_demographics = reduced_data
+        ethnicity_level = "Black Alone"
+        expected = 25204.844
+        actual = hw3.population_by_ethnicity(county_demographics, ethnicity_level)
+        self.assertAlmostEqual(expected, actual)
+
+    def test_population_by_ethnicity_3(self):
+        county_demographics = reduced_data
+        ethnicity_level = "Does Not Exist"
+        expected = 0.0
+        actual = hw3.population_by_ethnicity(county_demographics, ethnicity_level)
+        self.assertAlmostEqual(expected, actual)
     # test population_below_poverty_level
+    def test_population_below_poverty_level_1(self):
+        county_demographics = [reduced_data[2]]
+        expected = 14.3
+        actual = hw3.population_below_poverty_level(county_demographics)
+        self.assertAlmostEqual(expected, actual)
+
+    def test_population_below_poverty_level_2(self):
+        county_demographics = reduced_data
+        expected = 111.0
+        actual = hw3.population_below_poverty_level(county_demographics)
+        self.assertAlmostEqual(expected, actual)
 
     # Part 4
     # test percent_by_education
+    def test_percent_by_education_1(self):
+        county_demographics = [reduced_data[2]]
+        education_level = "Bachelor's Degree or Higher"
+        expected = 31.5
+        actual = hw3.percent_by_education(county_demographics, education_level)
+        self.assertAlmostEqual(expected, actual)
+
+    def test_percent_by_education_2(self):
+        county_demographics = reduced_data
+        education_level = "Bachelor's Degree or Higher"
+        expected = 29.7514827
+        actual = hw3.percent_by_education(county_demographics, education_level)
+        self.assertAlmostEqual(expected, actual)
+
+    def test_percent_by_education_3(self):
+        county_demographics = reduced_data
+        education_level = "Does Not Exist"
+        expected = 0.0
+        actual = hw3.percent_by_education(county_demographics, education_level)
+        self.assertAlmostEqual(expected, actual)
     # test percent_by_ethnicity
+    def test_percent_by_ethnicity_1(self):
+        county_demographics = [reduced_data[2]]
+        ethnicity_level = "Black Alone"
+        expected = 2.2
+        actual = hw3.percent_by_ethnicity(county_demographics, ethnicity_level)
+        self.assertAlmostEqual(expected, actual)
+
+    def test_percent_by_ethnicity_2(self):
+        county_demographics = reduced_data
+        ethnicity_level = "Black Alone"
+        expected = 3.8432974
+        actual = hw3.percent_by_ethnicity(county_demographics, ethnicity_level)
+        self.assertAlmostEqual(expected, actual)
+
+    def test_percent_by_ethnicity_3(self):
+        county_demographics = reduced_data
+        ethnicity_level = "Does Not Exist"
+        expected = 0.0
+        actual = hw3.percent_by_ethnicity(county_demographics, ethnicity_level)
+        self.assertAlmostEqual(expected, actual)
     # test percent_below_poverty_level
+    def test_percent_below_poverty_level(self):
+        county_demographics = [reduced_data[2]]
+        expected = 0.005123924
+        actual = hw3.percent_below_poverty_level(county_demographics)
+        self.assertAlmostEqual(expected, actual)
+
+    def test_percent_below_poverty_level_2(self):
+        county_demographics = reduced_data
+        expected = 0.016925557
+        actual = hw3.percent_below_poverty_level(county_demographics)
+        self.assertAlmostEqual(expected, actual)
 
     # Part 5
     # test education_greater_than
+    def test_education_greater_than_1(self):
+        county_demographics = reduced_data
+        education_level = "Bachelor's Degree or Higher"
+        threshold = 30
+        expected = [reduced_data[2], reduced_data[3]]
+        actual = hw3.education_greater_than(county_demographics, education_level, threshold)
+        self.assertEqual(expected, actual)
+
+    def test_education_greater_than_2(self):
+        county_demographics = reduced_data
+        education_level = "High School or Higher"
+        threshold = 60
+        expected = reduced_data
+        actual = hw3.education_greater_than(county_demographics, education_level, threshold)
+        self.assertEqual(expected, actual)
     # test education_less_than
+    def test_education_less_than_1(self):
+        county_demographics = reduced_data
+        education_level = "Bachelor's Degree or Higher"
+        threshold = 30
+        expected = [reduced_data[0], reduced_data[1], reduced_data[4], reduced_data[5], reduced_data[6]]
+        actual = hw3.education_less_than(county_demographics, education_level, threshold)
+        self.assertEqual(expected, actual)
+
+    def test_education_less_than_2(self):
+        county_demographics = reduced_data
+        education_level = "High School or Higher"
+        threshold = 60
+        expected = []
+        actual = hw3.education_less_than(county_demographics, education_level, threshold)
+        self.assertEqual(expected, actual)
     # test ethnicity_greater_than
+    def test_ethnicity_greater_than_1(self):
+        county_demographics = reduced_data
+        education_level = "Black Alone"
+        threshold = 10
+        expected = [reduced_data[0]]
+        actual = hw3.ethnicity_greater_than(county_demographics, education_level, threshold)
+        self.assertEqual(expected, actual)
+
+    def test_ethnicity_greater_than_2(self):
+        county_demographics = reduced_data
+        education_level = "Asian Alone"
+        threshold = 10
+        expected = [reduced_data[3]]
+        actual = hw3.ethnicity_greater_than(county_demographics, education_level, threshold)
+        self.assertEqual(expected, actual)
     # test ethnicity_less_than
+    def test_ethnicity_less_than_1(self):
+        county_demographics = reduced_data
+        education_level = "Black Alone"
+        threshold = 10
+        expected = [reduced_data[1], reduced_data[2], reduced_data[3], reduced_data[4], reduced_data[5], reduced_data[6]]
+        actual = hw3.ethnicity_less_than(county_demographics, education_level, threshold)
+        self.assertEqual(expected, actual)
+
+    def test_ethnicity_less_than_2(self):
+        county_demographics = reduced_data
+        education_level = "Asian Alone"
+        threshold = 10
+        expected = [reduced_data[0], reduced_data[1], reduced_data[2], reduced_data[4], reduced_data[5], reduced_data[6]]
+        actual = hw3.ethnicity_less_than(county_demographics, education_level, threshold)
+        self.assertEqual(expected, actual)
     # test below_poverty_level_greater_than
+    def test_below_poverty_level_greater_than_1(self):
+        county_demographics = reduced_data
+        threshold = 15
+        expected = [reduced_data[1], reduced_data[3], reduced_data[4], reduced_data[5]]
+        actual = hw3.below_poverty_level_greater_than(county_demographics, threshold)
+        self.assertEqual(expected, actual)
+
+    def test_below_poverty_level_greater_than_2(self):
+        county_demographics = reduced_data
+        threshold = 20
+        expected = [reduced_data[1]]
+        actual = hw3.below_poverty_level_greater_than(county_demographics, threshold)
+        self.assertEqual(expected, actual)
     # test below_poverty_level_less_than
+    def test_below_poverty_level_less_than_1(self):
+        county_demographics = reduced_data
+        threshold = 15
+        expected = [reduced_data[0], reduced_data[2], reduced_data[6]]
+        actual = hw3.below_poverty_level_less_than(county_demographics, threshold)
+        self.assertEqual(expected, actual)
+
+    def test_below_poverty_level_less_than_2(self):
+        county_demographics = reduced_data
+        threshold = 20
+        expected = [reduced_data[0], reduced_data[2], reduced_data[3], reduced_data[4], reduced_data[5], reduced_data[6]]
+        actual = hw3.below_poverty_level_less_than(county_demographics, threshold)
+        self.assertEqual(expected, actual)
 
 
 
